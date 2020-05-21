@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
-import rollingcubes.results.GameResultDao;
+import rollthecube.results.GameResultDao;
 import util.guice.PersistenceModule;
 
 import javax.inject.Inject;
