@@ -1,4 +1,4 @@
-package util.guice;
+package rollthecube.util.guice;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.persist.jpa.JpaPersistModule;

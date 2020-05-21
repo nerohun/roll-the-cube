@@ -1,4 +1,4 @@
-package util.jpa;
+package rollthecube.util.jpa;
 
 import java.util.List;
 import java.util.Optional;

@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import rollthecube.results.GameResultDao;
-import util.guice.PersistenceModule;
+import rollthecube.util.guice.PersistenceModule;
 
 import javax.inject.Inject;
 import java.util.List;
