@@ -16,8 +16,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DurationFormatUtils;
-import rollingcubes.results.GameResult;
-import rollingcubes.results.GameResultDao;
+import rollthecube.results.GameResult;
+import rollthecube.results.GameResultDao;
 
 import javax.inject.Inject;
 import java.io.IOException;

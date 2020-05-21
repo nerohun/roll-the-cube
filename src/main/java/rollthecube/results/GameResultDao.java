@@ -1,7 +1,7 @@
 package rollthecube.results;
 
 import com.google.inject.persist.Transactional;
-import util.jpa.GenericJpaDao;
+import rollthecube.util.jpa.GenericJpaDao;
 
 import java.util.List;
 

@@ -29,9 +29,11 @@ import javafx.scene.shape.Box;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DurationFormatUtils;
-import rollingcubes.results.GameResult;
-import rollingcubes.results.GameResultDao;
-import rollingcubes.state.RollingCubesState;
+import rollthecube.results.GameResult;
+import rollthecube.results.GameResultDao;
+import rollthecube.state.Map;
+import rollthecube.state.RollTheCubeState;
+
 
 import javax.inject.Inject;
 import java.io.IOException;
@@ -39,6 +41,8 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+
+import static rollthecube.state.Map.*;
 
 @Slf4j
 public class GameController {
@@ -50,7 +54,7 @@ public class GameController {
     private GameResultDao gameResultDao;
 
     private String playerName;
-    private RollingCubesState gameState;
+    private RollTheCubeState gameState;
     private IntegerProperty steps = new SimpleIntegerProperty();
     private Instant startTime;
     private List<Image> cubeImages;
@@ -80,8 +84,10 @@ public class GameController {
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
-    public int currX= 5;
-    public int currY=5;
+
+
+    public int currX= getCurrX();
+    public int currY= getCurrY();
     @FXML
     public void initialize() {
 
@@ -97,7 +103,7 @@ public class GameController {
     }
 
     private void resetGame() {
-        gameState = new RollingCubesState(RollingCubesState.NEAR_GOAL);
+        //gameState = new RollTheCubeState(RollTheCubeState.NEAR_GOAL);
         steps.set(0);
         startTime = Instant.now();
         gameOver.setValue(false);
@@ -106,7 +112,7 @@ public class GameController {
         Platform.runLater(() -> messageLabel.setText("Good luck, " + playerName + "!"));
     }
 
-    int[][] map = {
+    /*int[][] map = {
             {0,0,0,0,1,0,0 },
             {1,0,0,0,0,0,1 },
             {2,1,0,1,0,0,0 },
@@ -115,10 +121,11 @@ public class GameController {
             {0,0,1,0,1,3,1 },
             {0,0,0,0,0,0,0 }
 
-    };
+    };*/
+
 
     private void displayGameState() {
-
+        int [][] map = getMap();
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
                 Pane pane = (Pane) gameGrid.getChildren().get(i*7+j);
@@ -139,27 +146,20 @@ public class GameController {
         }
     }
 
+
+
     public void handleClickOnCube(MouseEvent mouseEvent) {
 
         int row = GridPane.getRowIndex((Node) mouseEvent.getSource());
         int col = GridPane.getColumnIndex((Node) mouseEvent.getSource());
-        System.out.println(row);
-        System.out.println(col);
+
         log.debug("Cube ({}, {}) is pressed", row, col);
-        isFree(col,row);
+        Map map = new Map();
+
+        map.isFree(col,row);
         displayGameState();
     }
-    public void isFree(int x,int y){
-        if (map[y][x]==1){
-            System.out.println("Ide Nem Lehet lépni!");
-        }else {
-            map[currY][currX] = 0;
-            map[y][x]=3;
-            currX=x;
-            currY=y;
-        }
 
-    }
 
     public void handleResetButton(ActionEvent actionEvent)  {
         log.debug("{} is pressed", ((Button) actionEvent.getSource()).getText());
