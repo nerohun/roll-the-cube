@@ -1,7 +1,7 @@
 package rollthecube.state;
 
 public class Map {
-    static int[][] map = {
+    static final int[][] map = {
             {0,0,0,0,1,0,0 },
             {1,0,0,0,0,0,1 },
             {2,1,0,1,0,0,0 },
@@ -11,10 +11,26 @@ public class Map {
             {0,0,0,0,0,0,0 }
 
     };
+    boolean win = false;
+
 
     public static int[][] getMap() {
         return map;
     }
+    public static int[][] resetMap(){
+        int[][] startMap = {
+                {0,0,0,0,1,0,0 },
+                {1,0,0,0,0,0,1 },
+                {2,1,0,1,0,0,0 },
+                {0,0,0,0,1,0,0 },
+                {0,1,0,0,0,0,0 },
+                {0,0,1,0,1,3,1 },
+                {0,0,0,0,0,0,0 }
+
+        };
+        return startMap;
+    }
+
 
     public static int[][] changeMap(int x, int y){
 
@@ -49,9 +65,16 @@ public class Map {
                 map[y][x] = 3;
                 currX = x;
                 currY = y;
+                isWin();
             }
         }
     }
 
+    public boolean isWin() {
+        if (currX==0&&currY==2){
+            win=true;
+        }
 
+        return win;
+    }
 }

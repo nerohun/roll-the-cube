@@ -25,11 +25,15 @@ public class RollTheCubeState implements Cloneable {
     /**
      * The array representing a near-goal configuration of the tray.
      */
-    public static final int[][] NEAR_GOAL = {
-            {1, 0, 2},
-            {3, 5, 2},
-            {6, 1, 5}
-    };
+    /*public static final int[][] NEAR_GOAL = {
+            {0,0,0,0,1,0,0 },
+            {1,0,0,0,0,0,1 },
+            {2,1,0,1,0,0,0 },
+            {0,0,0,0,1,0,0 },
+            {0,1,0,0,0,0,0 },
+            {0,0,1,0,1,3,1 },
+            {0,0,0,0,0,0,0 }
+    };*/
 
     /**
      * The array storing the current configuration of the tray.
@@ -48,6 +52,16 @@ public class RollTheCubeState implements Cloneable {
      */
     @Setter(AccessLevel.NONE)
     private int emptyCol;
+
+    public static final int[][] NEAR_GOAL = {
+        {0,0,0,0,1,0,0 },
+        {1,0,0,0,0,0,1 },
+        {2,1,0,1,0,0,0 },
+        {0,0,0,0,1,0,0 },
+        {0,1,0,0,0,0,0 },
+        {0,0,1,0,1,3,1 },
+        {0,0,0,0,0,0,0 }
+    };
 
     /**
      * Creates a {@code RollingCubesState} object representing the (original)

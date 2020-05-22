@@ -85,7 +85,7 @@ public class GameController {
         this.playerName = playerName;
     }
 
-
+    int [][] map = getMap();
     public int currX= getCurrX();
     public int currY= getCurrY();
     @FXML
@@ -97,13 +97,18 @@ public class GameController {
                 log.debug("Saving result to database...");
                 gameResultDao.persist(createGameResult());
                 stopWatchTimeline.stop();
+
             }
         });
+
         resetGame();
+
     }
 
     private void resetGame() {
-        //gameState = new RollTheCubeState(RollTheCubeState.NEAR_GOAL);
+        //map = RollTheCubeState.NEAR_GOAL;
+        currX=5;
+        currY=5;
         steps.set(0);
         startTime = Instant.now();
         gameOver.setValue(false);
@@ -112,20 +117,12 @@ public class GameController {
         Platform.runLater(() -> messageLabel.setText("Good luck, " + playerName + "!"));
     }
 
-    /*int[][] map = {
-            {0,0,0,0,1,0,0 },
-            {1,0,0,0,0,0,1 },
-            {2,1,0,1,0,0,0 },
-            {0,0,0,0,1,0,0 },
-            {0,1,0,0,0,0,0 },
-            {0,0,1,0,1,3,1 },
-            {0,0,0,0,0,0,0 }
-
-    };*/
 
 
     private void displayGameState() {
-        int [][] map = getMap();
+
+
+
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
                 Pane pane = (Pane) gameGrid.getChildren().get(i*7+j);
@@ -144,6 +141,7 @@ public class GameController {
                 }
             }
         }
+
     }
 
 
@@ -155,8 +153,17 @@ public class GameController {
 
         log.debug("Cube ({}, {}) is pressed", row, col);
         Map map = new Map();
-
         map.isFree(col,row);
+        if (map.isWin()){
+            log.info("Nyertél");
+            gameOver.setValue(true);
+            log.info("Player {} has solved the game in {} steps", playerName, steps.get());
+            messageLabel.setText("Congratulations, " + playerName + "!");
+            resetButton.setDisable(true);
+            giveUpButton.setText("Finish");
+        }
+        steps.set(steps.get() + 1);
+        stepsLabel.textProperty().bind(steps.asString());
         displayGameState();
     }
 
@@ -184,9 +191,10 @@ public class GameController {
     }
 
     private GameResult createGameResult() {
+        Map map = new Map();
         GameResult result = GameResult.builder()
                 .player(playerName)
-                .solved(gameState.isSolved())
+                .solved(map.isWin())
                 .duration(Duration.between(startTime, Instant.now()))
                 .steps(steps.get())
                 .build();
@@ -200,6 +208,7 @@ public class GameController {
         }), new KeyFrame(javafx.util.Duration.seconds(1)));
         stopWatchTimeline.setCycleCount(Animation.INDEFINITE);
         stopWatchTimeline.play();
+
     }
 
 }
