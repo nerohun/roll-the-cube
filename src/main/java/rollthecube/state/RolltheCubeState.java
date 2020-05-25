@@ -10,30 +10,25 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Data
 @Slf4j
-public class RollTheCubeState implements Cloneable {
+public class RolltheCubeState implements Cloneable {
 
     /**
      * The array representing the initial configuration of the tray.
      */
     public static final int[][] INITIAL = {
-            {1,1,1},
-            {1,0,1},
-            {1,1,1}
-
+            {1, 1, 1},
+            {1, 0, 1},
+            {1, 1, 1}
     };
 
     /**
      * The array representing a near-goal configuration of the tray.
      */
-    /*public static final int[][] NEAR_GOAL = {
-            {0,0,0,0,1,0,0 },
-            {1,0,0,0,0,0,1 },
-            {2,1,0,1,0,0,0 },
-            {0,0,0,0,1,0,0 },
-            {0,1,0,0,0,0,0 },
-            {0,0,1,0,1,3,1 },
-            {0,0,0,0,0,0,0 }
-    };*/
+    public static final int[][] NEAR_GOAL = {
+            {1, 0, 2},
+            {3, 5, 2},
+            {6, 1, 5}
+    };
 
     /**
      * The array storing the current configuration of the tray.
@@ -53,22 +48,12 @@ public class RollTheCubeState implements Cloneable {
     @Setter(AccessLevel.NONE)
     private int emptyCol;
 
-    public static final int[][] NEAR_GOAL = {
-        {0,0,0,0,1,0,0 },
-        {1,0,0,0,0,0,1 },
-        {2,1,0,1,0,0,0 },
-        {0,0,0,0,1,0,0 },
-        {0,1,0,0,0,0,0 },
-        {0,0,1,0,1,3,1 },
-        {0,0,0,0,0,0,0 }
-    };
-
     /**
      * Creates a {@code RollingCubesState} object representing the (original)
      * initial state of the puzzle.
      */
-    public void RollingCubesState() {
-
+    public RolltheCubeState() {
+        this(INITIAL);
     }
 
     /**
@@ -80,7 +65,7 @@ public class RollTheCubeState implements Cloneable {
      * @throws IllegalArgumentException if the array does not represent a valid
      *                                  configuration of the tray
      */
-    public void RollTheCubeState(int[][] a) {
+    public RolltheCubeState(int[][] a) {
         if (!isValidTray(a)) {
             throw new IllegalArgumentException();
         }
@@ -188,10 +173,10 @@ public class RollTheCubeState implements Cloneable {
         emptyCol = col;
     }
 
-    public RollTheCubeState clone() {
-        RollTheCubeState copy = null;
+    public RolltheCubeState clone() {
+        RolltheCubeState copy = null;
         try {
-            copy = (RollTheCubeState) super.clone();
+            copy = (RolltheCubeState) super.clone();
         } catch (CloneNotSupportedException e) {
         }
         copy.tray = new Cube[tray.length][];
@@ -213,7 +198,7 @@ public class RollTheCubeState implements Cloneable {
     }
 
     public static void main(String[] args) {
-        RollTheCubeState state = new RollTheCubeState();
+        RolltheCubeState state = new RolltheCubeState();
         System.out.println(state);
         state.rollToEmptySpace(0, 1);
         System.out.println(state);

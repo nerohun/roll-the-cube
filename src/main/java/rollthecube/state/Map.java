@@ -1,7 +1,7 @@
 package rollthecube.state;
 
-public class Map {
-    static final int[][] map = {
+public class Map implements Cloneable{
+    public static int[][] map = {
             {0,0,0,0,1,0,0 },
             {1,0,0,0,0,0,1 },
             {2,1,0,1,0,0,0 },
@@ -13,30 +13,22 @@ public class Map {
     };
     boolean win = false;
 
-
-    public static int[][] getMap() {
-        return map;
-    }
     public static int[][] resetMap(){
-        int[][] startMap = {
-                {0,0,0,0,1,0,0 },
-                {1,0,0,0,0,0,1 },
-                {2,1,0,1,0,0,0 },
-                {0,0,0,0,1,0,0 },
-                {0,1,0,0,0,0,0 },
-                {0,0,1,0,1,3,1 },
-                {0,0,0,0,0,0,0 }
+        map = new int[][]{
+                {0, 0, 0, 0, 1, 0, 0},
+                {1, 0, 0, 0, 0, 0, 1},
+                {2, 1, 0, 1, 0, 0, 0},
+                {0, 0, 0, 0, 1, 0, 0},
+                {0, 1, 0, 0, 0, 0, 0},
+                {0, 0, 1, 0, 1, 3, 1},
+                {0, 0, 0, 0, 0, 0, 0}
 
         };
-        return startMap;
+currX=5;
+currY=5;
+        return map;
     }
 
-
-    public static int[][] changeMap(int x, int y){
-
-
-    return map;
-    }
     public static int currX = 5;
 
     public static int getCurrX() {

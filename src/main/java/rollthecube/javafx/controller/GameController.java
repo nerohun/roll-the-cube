@@ -32,7 +32,7 @@ import org.apache.commons.lang3.time.DurationFormatUtils;
 import rollthecube.results.GameResult;
 import rollthecube.results.GameResultDao;
 import rollthecube.state.Map;
-import rollthecube.state.RollTheCubeState;
+import rollthecube.state.RolltheCubeState;
 
 
 import javax.inject.Inject;
@@ -54,7 +54,8 @@ public class GameController {
     private GameResultDao gameResultDao;
 
     private String playerName;
-    private RollTheCubeState gameState;
+    private RolltheCubeState gameState;
+    //private Map gameState;
     private IntegerProperty steps = new SimpleIntegerProperty();
     private Instant startTime;
     private List<Image> cubeImages;
@@ -85,7 +86,7 @@ public class GameController {
         this.playerName = playerName;
     }
 
-    int [][] map = getMap();
+    //int [][] map = getMap();
     public int currX= getCurrX();
     public int currY= getCurrY();
     @FXML
@@ -106,9 +107,9 @@ public class GameController {
     }
 
     private void resetGame() {
-        //map = RollTheCubeState.NEAR_GOAL;
         currX=5;
         currY=5;
+        Map.resetMap();
         steps.set(0);
         startTime = Instant.now();
         gameOver.setValue(false);
@@ -120,18 +121,19 @@ public class GameController {
 
 
     private void displayGameState() {
-
-
+        log.info("MAP: {}{}",map);
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
+
                 Pane pane = (Pane) gameGrid.getChildren().get(i*7+j);
                 pane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
                 if (map[j][i]==1) {
+                    //Not playable
                     pane.setBackground(new Background(new BackgroundFill(Color.rgb(100, 100, 100), CornerRadii.EMPTY, Insets.EMPTY)));
                 }else if (map[j][i]==2) {
-                    //Cél mező
+                    //Finish line
                     pane.setBackground(new Background(new BackgroundFill(Color.rgb(0, 255, 0), CornerRadii.EMPTY, Insets.EMPTY)));
                 }else if (map[j][i]==3) {
                     //Player Position
