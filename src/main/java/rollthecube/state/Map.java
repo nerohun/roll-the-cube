@@ -137,4 +137,19 @@ public class Map implements Cloneable{
     public void setGameover(boolean i ){
         gameover = i;
     }
+
+    public int getXoldal() {
+        return Xoldal;
+    }
+    public int getYoldal(){
+        return Yoldal;
+    }
+
+    public boolean getWin() {
+        return win;
+    }
+
+    public boolean getGameOver() {
+        return gameover;
+    }
 }
