@@ -6,6 +6,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.Year;
+
 @Data
 @Slf4j
 
@@ -23,7 +25,7 @@ public class Map implements Cloneable{
 
     };
     boolean win = false;
-    boolean six = false;
+    boolean gameover = false;
     public static int lepes = 0;
 
     public static int[][] resetMap(){
@@ -39,11 +41,13 @@ public class Map implements Cloneable{
         };
         currX=5;
         currY=5;
-        koldal=1;
+        Xoldal=2;
+        Yoldal=2;
         lepes = 0;
         return map;
     }
-    public static int koldal = 1;
+    public static int Xoldal = 2;
+    public static int Yoldal = 2;
     public static int currX = 5;
 
     public static int getCurrX() {
@@ -68,7 +72,7 @@ public class Map implements Cloneable{
             if(curry-nexty >1 || curry-nexty <-1 || currx-nextx >1 || currx-nextx<-1 || (curry+currx)-(nexty+nextx)>1 || (curry+currx)-(nexty+nextx)<-1 || curry+currx == nexty+nextx) {
                 log.info("Csak a szemközti 4 mezőre léphetsz!");
             }else{
-                mOldal(koldal,(currX-x),(currY-y));
+                gameOver((currX-x),(currY-y));
                 map[currY][currX] = 0;
                 map[y][x] = 3;
                 currX = x;
@@ -81,75 +85,56 @@ public class Map implements Cloneable{
     }
 
     public boolean isWin() {
-        if (currX==0&&currY==2 && koldal !=6){
+        if (currX==0&&currY==2 && Xoldal !=6){
             win=true;
         }
 
         return win;
     }
-    public boolean isSix() {
-        if (koldal == 6){
-            six=true;
-        }
+    public boolean isGameOver() {
 
-        return six;
+        return gameover;
     }
 
+        boolean xoldal = true;
+        boolean yoldal = true;
+    public void gameOver(int x, int y){
 
-    public void mOldal(int lap, int x, int y){
-        if (lap == 1){ // 1 > 2,5,3,4
-            if (x==1 && y==0){ // Kocka fordul balra;
-                koldal = 4;
-            }else if (x==-1 && y ==0){//jobbra
-                koldal = 3;
-            }else if (x==0 && y==1){ //  fel
-                koldal = 2;
-            }else{ // le
-                koldal = 5;
-            }
-        }else if (lap == 2){ // 2> 1,3,4,6
-            if (x==1 && y==0){ // Kocka fordul balra;
-                koldal = 4;
-            }else if (x==-1 && y ==0){//jobbra
-                koldal = 3;
-            }else if (x==0 && y==1){ //  fel
-                koldal = 6;
-            }else{ // le
-                koldal = 1;
-            }
-        }else if (lap == 3){ // 3>1,2,5,6
-            if (x==1 && y==0){ // Kocka fordul balra;
-                koldal = 5;
-            }else if (x==-1 && y ==0){//jobbra
-                koldal = 2;
-            }else if (x==0 && y==1){ //  fel
-                koldal = 1;
-            }else{ // le
-                koldal = 6;
-            }
-        }else if (lap == 4){ // 4 > 1,2,5,6
-            if (x==1 && y==0){ // Kocka fordul balra;
-                koldal = 2;
-            }else if (x==-1 && y ==0){//jobbra
-                koldal = 5;
-            }else if (x==0 && y==1){ //  fel
-                koldal = 1;
-            }else{ // le
-                koldal = 6;
-            }
-        }else if (lap == 5){ // 5 >1,3,4,6
-            if (x==1 && y==0){ // Kocka fordul balra;
-                koldal = 4;
-            }else if (x==-1 && y ==0){//jobbra
-                koldal = 3;
-            }else if (x==0 && y==1){ //  fel
-                koldal = 1;
-            }else{ // le
-                koldal = 6;
-            }
-        }
 
-        log.info("Oldal: {}",koldal);
+            if (x==1 && y==0){ // Kocka fordul balra;
+                if (Xoldal==1 || Xoldal == 3){
+
+                }else {
+                    Yoldal = Yoldal + x;
+                    xoldal = false;
+                }
+            }else if (x==-1 && y ==0){//jobbra
+                if (Xoldal==1 || Xoldal == 3){
+
+                }else {
+                    Yoldal = Yoldal + x;
+                    xoldal = false;
+                }
+            }else if (x==0 && y==1){ //  fel
+                if (Yoldal==1 || Yoldal == 3){
+
+                }else {
+                    Xoldal = Xoldal + y;
+                    xoldal = false;
+                }
+            }else{ // le
+                if (Yoldal==1 || Yoldal == 3){
+
+                }else {
+                    Xoldal = Xoldal + y;
+                    xoldal = false;
+                }
+            }
+            if (Yoldal ==0 || Yoldal == 4 || Xoldal == 0 || Xoldal == 4){
+                gameover = true;
+            }
+
+        log.info("Oldaly: {},oldalx: {}",Xoldal, Yoldal);
     }
 
 }

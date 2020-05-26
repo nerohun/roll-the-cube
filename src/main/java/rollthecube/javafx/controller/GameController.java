@@ -162,7 +162,7 @@ public class GameController {
         steps.set(lepes);
         stepsLabel.textProperty().bind(steps.asString());
         displayGameState();
-        if (m.isSix()){
+        if (m.isGameOver()){
             log.info("Rosszra fordult a kocka ! :)");
             gameOver.setValue(true);
             log.info("Player {} has rolled the cube to the wrong side ", playerName, steps.get());
