@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.shape.Box?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-font-size: 18;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rollthecube.javafx.controller.GameController">
     <center>
         <GridPane fx:id="gameGrid" prefHeight="510.0" prefWidth="510.0" style="-fx-background-color: #E0E0E0;" BorderPane.alignment="CENTER">

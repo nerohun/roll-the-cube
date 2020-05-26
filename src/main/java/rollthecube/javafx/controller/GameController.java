@@ -85,7 +85,7 @@ public class GameController {
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
-
+    Map m = new Map();
     //int [][] map = getMap();
     public int currX= getCurrX();
     public int currY= getCurrY();
@@ -107,8 +107,7 @@ public class GameController {
     }
 
     private void resetGame() {
-        currX=5;
-        currY=5;
+
         Map.resetMap();
         steps.set(0);
         startTime = Instant.now();
@@ -121,7 +120,7 @@ public class GameController {
 
 
     private void displayGameState() {
-        log.info("MAP: {}{}",map);
+        log.debug("MAP: {}",map);
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
@@ -138,11 +137,14 @@ public class GameController {
                 }else if (map[j][i]==3) {
                     //Player Position
                     pane.setBackground(new Background(new BackgroundFill(Color.rgb(255, 0, 0), CornerRadii.EMPTY, Insets.EMPTY)));
+                    pane.setBorder(new Border(new BorderStroke(Color.DARKRED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+                    
                 }else{
                     pane.setBackground(new Background(new BackgroundFill(Color.rgb(255,255,255),CornerRadii.EMPTY,Insets.EMPTY)));
                 }
             }
         }
+
 
     }
 
@@ -154,9 +156,22 @@ public class GameController {
         int col = GridPane.getColumnIndex((Node) mouseEvent.getSource());
 
         log.debug("Cube ({}, {}) is pressed", row, col);
-        Map map = new Map();
-        map.isFree(col,row);
-        if (map.isWin()){
+
+        m.isFree(col,row);
+
+        steps.set(steps.get() + 1);
+        stepsLabel.textProperty().bind(steps.asString());
+        displayGameState();
+        if (m.isSix()){
+            log.info("Rosszra fordult a kocka ! :)");
+            gameOver.setValue(true);
+            log.info("Player {} has rolled the cube to the wrong side ", playerName, steps.get());
+            messageLabel.setText("Better luck next time, " + playerName + "!");
+            resetButton.setDisable(true);
+            giveUpButton.setText("Finish");
+
+        }
+        if (m.isWin()){
             log.info("Nyertél");
             gameOver.setValue(true);
             log.info("Player {} has solved the game in {} steps", playerName, steps.get());
@@ -164,9 +179,7 @@ public class GameController {
             resetButton.setDisable(true);
             giveUpButton.setText("Finish");
         }
-        steps.set(steps.get() + 1);
-        stepsLabel.textProperty().bind(steps.asString());
-        displayGameState();
+
     }
 
 
