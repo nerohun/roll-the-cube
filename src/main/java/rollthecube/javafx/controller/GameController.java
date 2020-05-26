@@ -18,21 +18,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Material;
-import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.Box;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import rollthecube.results.GameResult;
 import rollthecube.results.GameResultDao;
 import rollthecube.state.Map;
-import rollthecube.state.RolltheCubeState;
 
 
 import javax.inject.Inject;
@@ -40,7 +34,6 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 import static rollthecube.state.Map.*;
 
@@ -54,11 +47,8 @@ public class GameController {
     private GameResultDao gameResultDao;
 
     private String playerName;
-    private RolltheCubeState gameState;
-    //private Map gameState;
     private IntegerProperty steps = new SimpleIntegerProperty();
     private Instant startTime;
-    private List<Image> cubeImages;
 
     @FXML
     private Label messageLabel;
@@ -86,9 +76,6 @@ public class GameController {
         this.playerName = playerName;
     }
     Map m = new Map();
-    //int [][] map = getMap();
-    public int currX= getCurrX();
-    public int currY= getCurrY();
     @FXML
     public void initialize() {
 
@@ -135,14 +122,32 @@ public class GameController {
                     //Finish line
                     pane.setBackground(new Background(new BackgroundFill(Color.rgb(0, 255, 0), CornerRadii.EMPTY, Insets.EMPTY)));
                 }else if (map[j][i]==3) {
+
                     //Player Position
-                    pane.setBackground(new Background(new BackgroundFill(Color.rgb(255, 0, 0), CornerRadii.EMPTY, Insets.EMPTY)));
+                    pane.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 255), CornerRadii.EMPTY, Insets.EMPTY)));
                     pane.setBorder(new Border(new BorderStroke(Color.DARKRED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
                     
                 }else{
                     pane.setBackground(new Background(new BackgroundFill(Color.rgb(255,255,255),CornerRadii.EMPTY,Insets.EMPTY)));
                 }
             }
+        }
+        if (Xoldal == 3  ){
+            Pane pane = (Pane) gameGrid.getChildren().get(currX*7+currY-1);
+            pane.setBackground(new Background(new BackgroundFill(Color.rgb(255, 0, 0), CornerRadii.EMPTY, Insets.EMPTY)));
+
+        }else if (Xoldal == 1 && ((currX)*7+currY+1)!=42&& ((currX)*7+currY+1)!=35&& ((currX)*7+currY+1)!=28&& ((currX)*7+currY+1)!=21&& ((currX)*7+currY+1)!=14&& ((currX)*7+currY+1)!=7){
+            Pane pane = (Pane) gameGrid.getChildren().get((currX*7+currY)+1);
+            pane.setBackground(new Background(new BackgroundFill(Color.rgb(255, 0, 0), CornerRadii.EMPTY, Insets.EMPTY)));
+
+        }else if (Yoldal == 3 && currX!=0){
+            Pane pane = (Pane) gameGrid.getChildren().get((currX-1)*7+currY);
+            pane.setBackground(new Background(new BackgroundFill(Color.rgb(255, 0, 0), CornerRadii.EMPTY, Insets.EMPTY)));
+
+        }else if (Yoldal == 1){
+            Pane pane = (Pane) gameGrid.getChildren().get(((currX+1)*7+currY));
+            pane.setBackground(new Background(new BackgroundFill(Color.rgb(255, 0, 0), CornerRadii.EMPTY, Insets.EMPTY)));
+
         }
 
 

@@ -49,17 +49,7 @@ public class Map implements Cloneable{
     public static int Xoldal = 2;
     public static int Yoldal = 2;
     public static int currX = 5;
-
-    public static int getCurrX() {
-        return currX;
-    }
-
     public static int currY=5;
-
-    public static int getCurrY() {
-        return currY;
-    }
-
     public void isFree(int x, int y) {
         int curry = currY;
         int currx = currX;
@@ -85,7 +75,7 @@ public class Map implements Cloneable{
     }
 
     public boolean isWin() {
-        if (currX==0&&currY==2 && Xoldal !=6){
+        if (currX==0&&currY==2 && !gameover){
             win=true;
         }
 
@@ -96,8 +86,6 @@ public class Map implements Cloneable{
         return gameover;
     }
 
-        boolean xoldal = true;
-        boolean yoldal = true;
     public void gameOver(int x, int y){
 
 
@@ -106,35 +94,33 @@ public class Map implements Cloneable{
 
                 }else {
                     Yoldal = Yoldal + x;
-                    xoldal = false;
+
                 }
             }else if (x==-1 && y ==0){//jobbra
                 if (Xoldal==1 || Xoldal == 3){
 
                 }else {
                     Yoldal = Yoldal + x;
-                    xoldal = false;
+
                 }
             }else if (x==0 && y==1){ //  fel
                 if (Yoldal==1 || Yoldal == 3){
 
                 }else {
                     Xoldal = Xoldal + y;
-                    xoldal = false;
                 }
             }else{ // le
                 if (Yoldal==1 || Yoldal == 3){
 
                 }else {
                     Xoldal = Xoldal + y;
-                    xoldal = false;
                 }
             }
             if (Yoldal ==0 || Yoldal == 4 || Xoldal == 0 || Xoldal == 4){
                 gameover = true;
             }
 
-        log.info("Oldaly: {},oldalx: {}",Xoldal, Yoldal);
+        log.debug("Oldaly: {},oldalx: {}",Xoldal, Yoldal);
     }
 
 }
