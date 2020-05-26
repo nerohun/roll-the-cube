@@ -1,13 +1,17 @@
 package rollthecube.state;
 
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Data
 @Slf4j
 
-public class Map implements Cloneable{
 
+public class Map implements Cloneable{
+    private IntegerProperty steps = new SimpleIntegerProperty();
     public static int[][] map = {
             {0,0,0,0,1,0,0 },
             {1,0,0,0,0,0,1 },
@@ -20,6 +24,7 @@ public class Map implements Cloneable{
     };
     boolean win = false;
     boolean six = false;
+    public static int lepes = 0;
 
     public static int[][] resetMap(){
         map = new int[][]{
@@ -35,6 +40,7 @@ public class Map implements Cloneable{
         currX=5;
         currY=5;
         koldal=1;
+        lepes = 0;
         return map;
     }
     public static int koldal = 1;
@@ -68,6 +74,7 @@ public class Map implements Cloneable{
                 currX = x;
                 currY = y;
                 isWin();
+                lepes++;
 
             }
         }

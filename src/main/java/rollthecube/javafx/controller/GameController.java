@@ -159,7 +159,7 @@ public class GameController {
 
         m.isFree(col,row);
 
-        steps.set(steps.get() + 1);
+        steps.set(lepes);
         stepsLabel.textProperty().bind(steps.asString());
         displayGameState();
         if (m.isSix()){
