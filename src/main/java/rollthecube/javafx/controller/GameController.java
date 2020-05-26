@@ -170,7 +170,7 @@ public class GameController {
         if (m.isGameOver()){
             log.info("Rosszra fordult a kocka ! :)");
             gameOver.setValue(true);
-            log.info("Player {} has rolled the cube to the wrong side ", playerName, steps.get());
+            log.info("Player {} has rolled the cube to the wrong side ", playerName);
             messageLabel.setText("Better luck next time, " + playerName + "!");
             resetButton.setDisable(true);
             giveUpButton.setText("Finish");

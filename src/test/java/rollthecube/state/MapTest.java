@@ -40,6 +40,9 @@ public class MapTest {
 
     @Test
     void isWin() {
+    m.setCurrX(5);
+    m.setCurrY(5);
+
     assertFalse(new Map().isWin());
     assertWin(5,5,false,false);
     m.setCurrX(0);

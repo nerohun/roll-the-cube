@@ -9,9 +9,25 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @Slf4j
 
+/**
+ * Class representing the map and the cube's movement.
+ */
+
 
 public class Map implements Cloneable{
     private IntegerProperty steps = new SimpleIntegerProperty();
+
+    public static int Xoldal = 2;
+    public static int Yoldal = 2;
+    public static int currX = 5;
+    public static int currY=5;
+    boolean win = false;
+    boolean gameover = false;
+    public static int lepes = 0;
+    /**
+     * Initalize the map array, this is the playground.
+     */
+
     public static int[][] map = {
             {0,0,0,0,1,0,0 },
             {1,0,0,0,0,0,1 },
@@ -22,10 +38,12 @@ public class Map implements Cloneable{
             {0,0,0,0,0,0,0 }
 
     };
-    boolean win = false;
-    boolean gameover = false;
-    public static int lepes = 0;
 
+    /**
+     *Reset the map if the player press the reset button
+     * set lepes for count the player moves.
+     * @return new array, representig the start position
+     */
     public static int[][] resetMap(){
         map = new int[][]{
                 {0, 0, 0, 0, 1, 0, 0},
@@ -37,17 +55,30 @@ public class Map implements Cloneable{
                 {0, 0, 0, 0, 0, 0, 0}
 
         };
+        resetPlayer();
+        lepes = 0;
+        return map;
+    }
+
+    /**
+     * Represent the player start position
+     */
+
+    public static void resetPlayer(){
+
         currX=5;
         currY=5;
         Xoldal=2;
         Yoldal=2;
-        lepes = 0;
-        return map;
     }
-    public static int Xoldal = 2;
-    public static int Yoldal = 2;
-    public static int currX = 5;
-    public static int currY=5;
+
+    /**
+     * When the player select a new cube, the method examines the next cube, if it Free the player can move there.
+     *
+     *
+     * @param x : player next X coordinates in the map
+     * @param y : player next Y coordinates in the map
+     */
     public void isFree(int x, int y) {
         int curry = currY;
         int currx = currX;
@@ -72,6 +103,11 @@ public class Map implements Cloneable{
         }
     }
 
+    /**
+     *Examines the player position and the gameover value.
+     * If the player in the Finish position and the gameover not true, the player win the game.
+     * @return the player won the game
+     */
     public boolean isWin() {
         if (currX==0&&currY==2 && !gameover){
             win=true;
@@ -79,10 +115,23 @@ public class Map implements Cloneable{
 
         return win;
     }
+
+    /**
+     *The game is over.
+     *
+     * @return true when players game is game over
+     */
     public boolean isGameOver() {
 
         return gameover;
     }
+
+    /**
+     *Roll the cube the right side.
+     * This class represent the cube side, if the red side of the cube touch the map, the game is over.
+     * @param x : Player movement of the X axis
+     * @param y : Player movement of the Y axis
+     */
 
     public void gameOver(int x, int y){
 
