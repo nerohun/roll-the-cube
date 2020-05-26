@@ -16,13 +16,28 @@ import lombok.extern.slf4j.Slf4j;
 
 public class Map implements Cloneable{
     private IntegerProperty steps = new SimpleIntegerProperty();
-
+    /**
+     * Specifies the player cubes X side
+     */
     public static int Xoldal = 2;
+    /**
+     * Specifies the player cubes Y side
+     */
     public static int Yoldal = 2;
+    /**
+     *Specifies the player start X position
+     */
     public static int currX = 5;
+    /**
+     *Specifies the player start Y position
+     */
     public static int currY=5;
+
     boolean win = false;
     boolean gameover = false;
+    /**
+     * Specifies of the players number of steps
+     */
     public static int lepes = 0;
     /**
      * Initalize the map array, this is the playground.
@@ -62,7 +77,7 @@ public class Map implements Cloneable{
     }
 
     /**
-     * Represent the player start position in the map and the cube state
+     * Reset the player start position in the map and the cube state
      */
 
     public static void resetPlayer(){
@@ -74,7 +89,7 @@ public class Map implements Cloneable{
     }
 
     /**
-     * When the player select a new cube in the , the method examines the next cube, if it Free the player can move there.
+     * When the player select a new cube the method examines the cube, if it Free the player can move there.
      *
      *
      * @param x : player next X coordinates in the map
@@ -117,8 +132,9 @@ public class Map implements Cloneable{
     }
 
     /**
-     *The game is over.
+     *Represent the game status
      *
+     *  when the {@code gameover} is true, the game is over
      * @return true when players game is over, false anyway
      */
     public boolean isGameOver() {
@@ -170,9 +186,8 @@ public class Map implements Cloneable{
         log.debug("Oldaly: {},oldalx: {}",Xoldal, Yoldal);
     }
 
-    public int getCurrX() {
-        return currX;
-    }
+    public static int getCurrX() { return currX; }
+
     public int getCurrY() {
         return currY;
     }
