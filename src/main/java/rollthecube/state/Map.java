@@ -6,8 +6,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import java.time.Year;
-
 @Data
 @Slf4j
 
@@ -123,4 +121,20 @@ public class Map implements Cloneable{
         log.debug("Oldaly: {},oldalx: {}",Xoldal, Yoldal);
     }
 
+    public int getCurrX() {
+        return currX;
+    }
+    public int getCurrY() {
+        return currY;
+    }
+
+    public void setCurrX(int i) {
+        currX=i;
+    }
+    public void setCurrY(int i){
+        currY = i;
+    }
+    public void setGameover(boolean i ){
+        gameover = i;
+    }
 }
