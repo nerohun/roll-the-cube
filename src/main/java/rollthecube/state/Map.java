@@ -42,7 +42,8 @@ public class Map implements Cloneable{
     /**
      *Reset the map if the player press the reset button
      * set lepes for count the player moves.
-     * @return new array, representig the start position
+     * set player position to the start.
+     * @return new array, representing the start position
      */
     public static int[][] resetMap(){
         map = new int[][]{
@@ -61,7 +62,7 @@ public class Map implements Cloneable{
     }
 
     /**
-     * Represent the player start position
+     * Represent the player start position in the map and the cube state
      */
 
     public static void resetPlayer(){
@@ -73,7 +74,7 @@ public class Map implements Cloneable{
     }
 
     /**
-     * When the player select a new cube, the method examines the next cube, if it Free the player can move there.
+     * When the player select a new cube in the , the method examines the next cube, if it Free the player can move there.
      *
      *
      * @param x : player next X coordinates in the map
@@ -85,8 +86,7 @@ public class Map implements Cloneable{
         int nexty=y;
         int nextx=x;
         if (map[y][x] == 1) {
-            System.out.println("Ide Nem Lehet lépni!");
-            log.info("Cube ({}, {}) is pressed", x, y);
+            log.info("Ide nem lehet lépni!");
         } else {
             if(curry-nexty >1 || curry-nexty <-1 || currx-nextx >1 || currx-nextx<-1 || (curry+currx)-(nexty+nextx)>1 || (curry+currx)-(nexty+nextx)<-1 || curry+currx == nexty+nextx) {
                 log.info("Csak a szemközti 4 mezőre léphetsz!");
@@ -106,7 +106,7 @@ public class Map implements Cloneable{
     /**
      *Examines the player position and the gameover value.
      * If the player in the Finish position and the gameover not true, the player win the game.
-     * @return the player won the game
+     * @return true when the player won, false anyway
      */
     public boolean isWin() {
         if (currX==0&&currY==2 && !gameover){
@@ -119,7 +119,7 @@ public class Map implements Cloneable{
     /**
      *The game is over.
      *
-     * @return true when players game is game over
+     * @return true when players game is over, false anyway
      */
     public boolean isGameOver() {
 
@@ -127,7 +127,7 @@ public class Map implements Cloneable{
     }
 
     /**
-     *Roll the cube the right side.
+     *Roll the players cube of the right side.
      * This class represent the cube side, if the red side of the cube touch the map, the game is over.
      * @param x : Player movement of the X axis
      * @param y : Player movement of the Y axis

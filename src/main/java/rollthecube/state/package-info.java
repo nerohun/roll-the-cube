@@ -1,4 +1,4 @@
 /**
- * Defines the state-space representation of the rolling cubes puzzle.
+ * Defines the map representation and the players cube of the roll the cube puzzle.
  */
 package rollthecube.state;

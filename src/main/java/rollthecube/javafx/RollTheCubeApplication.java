@@ -20,7 +20,7 @@ public class RollTheCubeApplication extends Application {
             new AbstractModule() {
                 @Override
                 protected void configure() {
-                    install(new PersistenceModule("rolling-cubes"));
+                    install(new PersistenceModule("roll-the-cube"));
                     bind(GameResultDao.class);
                 }
             }
