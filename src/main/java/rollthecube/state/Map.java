@@ -152,4 +152,8 @@ public class Map implements Cloneable{
     public boolean getGameOver() {
         return gameover;
     }
+
+    public int[][] getMap() {
+        return map;
+    }
 }

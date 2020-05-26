@@ -4,33 +4,31 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MapTest {
-
+    Map m = new Map();
+    private void assertisFree(int x, int y) {
+        assertAll("isFree",
+                () -> assertEquals(x, m.getCurrX(), "X"),
+                () -> assertEquals(y, m.getCurrY(), "Y")
+        );
+    }
 
     @Test
     void isFree() {
-        Map m = new Map();
-        m.getCurrX();
-        m.getCurrY();
-        //assertFalse(m.isFree(0, 0));
+
+        assertisFree(5,5);
+        m.isFree(6,5);// Itt egy szürke kocka van.
+        assertisFree(5,5);
+        m.isFree(4,5);//Itt egy szürke kocka van.
+        assertisFree(5,5);
+        m.isFree(5,6);//Ez egy fehér mező, szabadon rá lehet lépni.
+        assertisFree(5,6);
+        m.isFree(1,1);//Ide nem lehet lépni!!
+        assertisFree(5,6);
 
 
-    }
-    @Test
-    void resetMap(){
-
-        int[][] map =  new int[][]{
-                {0, 0, 0, 0, 1, 0, 0},
-                {1, 0, 0, 0, 0, 0, 1},
-                {2, 1, 0, 1, 0, 0, 0},
-                {0, 0, 0, 0, 1, 0, 0},
-                {0, 1, 0, 0, 0, 0, 0},
-                {0, 0, 1, 0, 1, 3, 1},
-                {0, 0, 0, 0, 0, 0, 0}
-
-        };
 
     }
-    Map m = new Map();
+
     private void assertWin(int x, int y,boolean go,boolean win) {
         assertAll("IsWin",
                 () -> assertEquals(x, m.getCurrX(), "X"),
