@@ -32,8 +32,15 @@ public class Map implements Cloneable{
      *Specifies the player start Y position
      */
     public static int currY=5;
-
+    /**
+     * Specifies the game state.
+     * If the {@code win} true, the player win the game
+     */
     boolean win = false;
+    /**
+     * Specifies the game state.
+     * If the {@code gameover} true, the player lost the game
+     */
     boolean gameover = false;
     /**
      * Specifies of the players number of steps
@@ -56,7 +63,7 @@ public class Map implements Cloneable{
 
     /**
      *Reset the map if the player press the reset button
-     * set lepes for count the player moves.
+     *  {@code lepes}  count the players orderly moves.
      * set player position to the start.
      * @return new array, representing the start position
      */
@@ -78,6 +85,8 @@ public class Map implements Cloneable{
 
     /**
      * Reset the player start position in the map and the cube state
+     * currX and currY the player start position on the map
+     * Xoldal and Yoldal for the player cubes orientation
      */
 
     public static void resetPlayer(){
@@ -90,6 +99,8 @@ public class Map implements Cloneable{
 
     /**
      * When the player select a new cube the method examines the cube, if it Free the player can move there.
+     *Firstly, examinate the next position. If it occupied, the player cant move there.
+     * After that, you cannot cross multiple fields, and cannot move your current posititon
      *
      *
      * @param x : player next X coordinates in the map
@@ -144,7 +155,7 @@ public class Map implements Cloneable{
 
     /**
      *Roll the players cube of the right side.
-     * This class represent the cube side, if the red side of the cube touch the map, the game is over.
+     * This class represent the cube side, if the "red" side of the cube touch the map, the game is over.
      * @param x : Player movement of the X axis
      * @param y : Player movement of the Y axis
      */

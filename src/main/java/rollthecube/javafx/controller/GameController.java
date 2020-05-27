@@ -132,7 +132,7 @@ public class GameController {
                 }
             }
         }
-        if (Xoldal == 3  ){
+        if (Xoldal == 3  && currX*7+currY-1!=31 &&currX*7+currY-1 !=11 ){
             Pane pane = (Pane) gameGrid.getChildren().get(currX*7+currY-1);
             pane.setBackground(new Background(new BackgroundFill(Color.rgb(255, 0, 0), CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -144,7 +144,7 @@ public class GameController {
             Pane pane = (Pane) gameGrid.getChildren().get((currX-1)*7+currY);
             pane.setBackground(new Background(new BackgroundFill(Color.rgb(255, 0, 0), CornerRadii.EMPTY, Insets.EMPTY)));
 
-        }else if (Yoldal == 1){
+        }else if (Yoldal == 1 && (currX+1)*7+currY !=19){
             Pane pane = (Pane) gameGrid.getChildren().get(((currX+1)*7+currY));
             pane.setBackground(new Background(new BackgroundFill(Color.rgb(255, 0, 0), CornerRadii.EMPTY, Insets.EMPTY)));
 
